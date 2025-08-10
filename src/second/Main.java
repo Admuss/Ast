@@ -1,7 +1,6 @@
 package second;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 class Book {
     private String title;
