@@ -1,9 +1,10 @@
 package third;
+
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
-class FileOperationException extends Exception {
+class FileOperationException extends RuntimeException {
     public FileOperationException(String message) {
         super(message);
     }
@@ -14,7 +15,7 @@ class FileOperationException extends Exception {
 }
 
 public class File {
-    public static void writeToFile(String filename, String content) throws FileOperationException {
+    public static void writeToFile(String filename, String content) {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename))) {
             writer.write(content);
             System.out.println("Данные успешно записаны в файл: " + filename);
@@ -23,7 +24,7 @@ public class File {
         }
     }
 
-    public static String readFromFile(String filename) throws FileOperationException {
+    public static String readFromFile(String filename) {
         try {
             return Files.readString(Paths.get(filename));
         } catch (NoSuchFileException e) {
@@ -44,15 +45,14 @@ public class File {
             System.out.println("3. Выход");
             System.out.print("Выберите действие (1-3): ");
             
-            int choice = 0;
-            try {
-                choice = scanner.nextInt();
-                scanner.nextLine(); // Очистка буфера
-            } catch (InputMismatchException e) {
+            if (!scanner.hasNextInt()) {
                 System.out.println("Ошибка: введите число от 1 до 3");
                 scanner.nextLine(); // Очистка неверного ввода
                 continue;
             }
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Очистка буфера
 
             switch (choice) {
                 case 1:
@@ -60,11 +60,7 @@ public class File {
                     String writeFilename = scanner.nextLine();
                     System.out.print("Введите текст для записи: ");
                     String content = scanner.nextLine();
-                    try {
-                        writeToFile(writeFilename, content);
-                    } catch (FileOperationException e) {
-                        System.err.println("Ошибка: " + e.getMessage());
-                    }
+                    writeToFile(writeFilename, content);
                     break;
                 case 2:
                     System.out.print("Введите имя файла: ");
