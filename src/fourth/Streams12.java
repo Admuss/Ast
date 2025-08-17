@@ -12,15 +12,15 @@ public class Streams12 {
                 synchronized (lock) {
                     while (!isFirst) {
                         try {
-                            lock.wait(); // Ждем, пока другой поток не выведет свое число
+                            lock.wait(); 
                         } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt(); // Важно правильно обработать прерывание
-                            return; // Выходим из потока, если нас прервали
+                            Thread.currentThread().interrupt(); 
+                            return; 
                         }
                     }
                     System.out.print("1");
                     isFirst = false;
-                    lock.notify(); // Уведомляем другой поток
+                    lock.notify(); 
                 }
             }
         });
@@ -30,15 +30,15 @@ public class Streams12 {
                 synchronized (lock) {
                     while (isFirst) {
                         try {
-                            lock.wait(); // Ждем, пока другой поток не выведет свое число
+                            lock.wait(); 
                         } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt(); // Важно правильно обработать прерывание
-                            return; // Выходим из потока, если нас прервали
+                            Thread.currentThread().interrupt(); 
+                            return; 
                         }
                     }
                     System.out.print("2");
                     isFirst = true;
-                    lock.notify(); // Уведомляем другой поток
+                    lock.notify(); 
                 }
             }
         });
@@ -46,15 +46,12 @@ public class Streams12 {
         thread1.start();
         thread2.start();
 
-        // Дать потокам поработать какое-то время, чтобы увидеть результат
-        // (необязательно, но полезно для демонстрации)
         try {
-            Thread.sleep(5000); // Ждем 5 секунд
+            Thread.sleep(5000); 
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
 
-        // Прерываем потоки, чтобы завершить программу корректно
         thread1.interrupt();
         thread2.interrupt();
     }

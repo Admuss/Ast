@@ -18,11 +18,11 @@ public class LiveLock {
                     System.out.println(name + " acquired lock1, trying to acquire lock2...");
                     if (lock2.tryLock()) {
                         System.out.println(name + " acquired lock2.");
-                        break; // Success!
+                        break; 
                     } else {
                         System.out.println(name + " release lock1, lock2 not available.");
                         lock1.unlock();
-                        Thread.sleep(1); // Small delay to avoid spinning too fast
+                        Thread.sleep(1); 
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -50,7 +50,7 @@ public class LiveLock {
                     } else {
                         System.out.println(name + " release lock2, lock1 not available.");
                         lock2.unlock();
-                        Thread.sleep(1); // Small delay to avoid spinning too fast
+                        Thread.sleep(1); 
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
