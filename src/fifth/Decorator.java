@@ -1,12 +1,10 @@
 package fifth;
 
-// 1. Component (Компонент)
 interface Coffee {
     String getDescription();
     double getCost();
 }
 
-// 2. ConcreteComponent (Конкретный Компонент)
 class SimpleCoffee implements Coffee {
     @Override
     public String getDescription() {
@@ -19,7 +17,6 @@ class SimpleCoffee implements Coffee {
     }
 }
 
-// 3. Decorator (Декоратор)
 abstract class CoffeeDecorator implements Coffee {
     protected Coffee coffee;
 
@@ -38,7 +35,6 @@ abstract class CoffeeDecorator implements Coffee {
     }
 }
 
-// 4. ConcreteDecorator (Конкретные Декораторы)
 class MilkDecorator extends CoffeeDecorator {
     public MilkDecorator(Coffee coffee) {
         super(coffee);
@@ -87,23 +83,22 @@ class CinnamonDecorator extends CoffeeDecorator {
     }
 }
 
-// 5. Client (Клиент)
 public class Decorator {
     public static void main(String[] args) {
         Coffee coffee = new SimpleCoffee();
-        System.out.println("Описание: " + coffee.getDescription()); // Вывод: Описание: Простой кофе
-        System.out.println("Стоимость: " + coffee.getCost()); // Вывод: Стоимость: 1.0
+        System.out.println("Описание: " + coffee.getDescription()); 
+        System.out.println("Стоимость: " + coffee.getCost()); 
 
         Coffee milkCoffee = new MilkDecorator(coffee);
-        System.out.println("Описание: " + milkCoffee.getDescription()); // Вывод: Описание: Простой кофе, с молоком
-        System.out.println("Стоимость: " + milkCoffee.getCost()); // Вывод: Стоимость: 1.5
+        System.out.println("Описание: " + milkCoffee.getDescription()); 
+        System.out.println("Стоимость: " + milkCoffee.getCost()); 
 
         Coffee sugarMilkCoffee = new SugarDecorator(milkCoffee);
-        System.out.println("Описание: " + sugarMilkCoffee.getDescription()); // Вывод: Описание: Простой кофе, с молоком, с сахаром
-        System.out.println("Стоимость: " + sugarMilkCoffee.getCost()); // Вывод: Стоимость: 1.7
+        System.out.println("Описание: " + sugarMilkCoffee.getDescription()); 
+        System.out.println("Стоимость: " + sugarMilkCoffee.getCost()); 
 
         Coffee cinnamonSugarMilkCoffee = new CinnamonDecorator(sugarMilkCoffee);
-        System.out.println("Описание: " + cinnamonSugarMilkCoffee.getDescription()); // Вывод: Описание: Простой кофе, с молоком, с сахаром, с корицей
-        System.out.println("Стоимость: " + cinnamonSugarMilkCoffee.getCost()); // Вывод: Стоимость: 2.0
+        System.out.println("Описание: " + cinnamonSugarMilkCoffee.getDescription()); 
+        System.out.println("Стоимость: " + cinnamonSugarMilkCoffee.getCost()); 
     }
 }

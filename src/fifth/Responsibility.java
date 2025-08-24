@@ -85,10 +85,9 @@ class LeaveRequest {
     }
 }
 
-// 5. Client (Клиент)
 public class Responsibility {
     public static void main(String[] args) {
-        // Создаем цепочку обработчиков
+
         LeaveHandler manager = new Manager();
         LeaveHandler departmentHead = new DepartmentHead();
         LeaveHandler director = new Director();
@@ -96,13 +95,11 @@ public class Responsibility {
         manager.setNextHandler(departmentHead);
         departmentHead.setNextHandler(director);
 
-        // Создаем запросы на отпуск
         LeaveRequest request1 = new LeaveRequest("Иванов", 2);
         LeaveRequest request2 = new LeaveRequest("Петров", 5);
         LeaveRequest request3 = new LeaveRequest("Сидоров", 15);
         LeaveRequest request4 = new LeaveRequest("Смирнов", 40); // Отклонен
 
-        // Отправляем запросы на обработку
         manager.handleRequest(request1); // Менеджер одобрил запрос на отпуск на 2 дней.
         manager.handleRequest(request2); // Руководитель отдела одобрил запрос на отпуск на 5 дней.
         manager.handleRequest(request3); // Директор одобрил запрос на отпуск на 15 дней.

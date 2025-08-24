@@ -1,11 +1,10 @@
 package fifth;
-// 1. Product (Продукт)
 class Computer {
     private String cpu;
     private String ram;
     private String hdd;
 
-    // Конструктор теперь private, чтобы его можно было вызывать только из Builder
+
     private Computer(String cpu, String ram, String hdd) {
         this.cpu = cpu;
         this.ram = ram;
@@ -41,7 +40,7 @@ class Computer {
 
         public Builder setCpu(String cpu) {
             this.cpu = cpu;
-            return this; // Возвращаем Builder для цепочки вызовов
+            return this; 
         }
 
         public Builder setRam(String ram) {
@@ -55,7 +54,7 @@ class Computer {
         }
 
         public Computer build() {
-            // Простая валидация (можно сделать более сложной)
+
             if (cpu == null || ram == null || hdd == null) {
                 throw new IllegalArgumentException("CPU, RAM, и HDD обязательны!");
             }
@@ -64,10 +63,10 @@ class Computer {
     }
 }
 
-// 3. Client (Клиент)
+
 public class Builder {
     public static void main(String[] args) {
-        // Используем Builder для создания объекта Computer
+    
         Computer computer = new Computer.Builder()
                 .setCpu("Intel i5")
                 .setRam("8GB")
